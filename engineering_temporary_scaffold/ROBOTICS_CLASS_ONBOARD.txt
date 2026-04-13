@@ -1,0 +1,205 @@
+INTRODUCTION TO ROBOTICS - ONBOARD CLASS CURRICULUM
+====================================================
+
+Course: PROJECT: KANGAROO - INTELLIGENT SYSTEM ROBOTICS
+Duration: 4 weeks (ongoing)
+Level: Advanced (Foundation in OS architecture required)
+
+---
+
+MODULE 1: SYSTEM ROBOTICS FUNDAMENTALS
+Week 1
+
+Objectives:
+- Understand autonomous system decision-making
+- Learn signal-driven architecture patterns
+- Master multi-layer subsystem coordination
+
+Core Concepts:
+
+1. Autonomous Decision Trees
+   The intent layer functions as the "decision cortex" of the system.
+   - Input signals arrive from multiple sources
+   - Classification engine sorts intent
+   - Router distributes to appropriate subsystems
+   - Feedback loops inform future decisions
+
+2. Signal-Driven Architecture
+   Project: Kangaroo uses photonic/signal-based control:
+   - Photon signals represent system events
+   - Sensors detect field state changes
+   - Transmitters broadcast state changes
+   - LED overlays provide visibility into decision paths
+
+3. Multi-Layer Subsystem Coordination
+   Five integrated layers working in harmony:
+   - Intent Layer: perception and decision
+   - Capability Layer: action generation
+   - Identity Layer: system self-representation
+   - Security Layer: integrity and protection
+   - Orchestration Layer: lifecycle management
+
+---
+
+MODULE 2: TRUST-BASED ROBOTICS
+Week 2
+
+Objectives:
+- Implement trust registry for autonomous decisions
+- Design audit trails for robotic actions
+- Create verifiable operation chains
+
+Key Principles:
+
+1. Every Autonomous Action Has a Trust Record
+   - Decision made → trust record issued
+   - Action executed → completion recorded
+   - Result verified → integrity hash stored
+   - Creates complete audit trail of robotic behavior
+
+2. Verifiable Operation Chains
+   - Operations link through trust registry
+   - Unable to execute without trust verification
+   - Prevents unauthorized autonomous actions
+   - Enables operator override and rollback
+
+3. Self-Healing Autonomous Systems
+   - Coherence guards monitor system state
+   - Deviations trigger self-repair protocols
+   - Biometric guards restore component state
+   - System heals without operator intervention
+
+---
+
+MODULE 3: SIGNAL GATE ROBOTICS
+Week 3
+
+Objectives:
+- Understand gated access control for autonomous systems
+- Master passkey verification for robot activation
+- Implement time-distribution for safe autonomous operation
+
+Advanced Topics:
+
+1. Outside-to-Innermost Gate Lockdown
+   Prevents unauthorized autonomous behavior:
+   - Gate starts locked (default safe state)
+   - Requires validated signal/passkey to unlock
+   - Active-online transistor required for signal acceptance
+   - Armored mode adds cryptographic passkey layer
+
+2. Transistor-Based Activation
+   Signal path control:
+   - Transistor in insulated mode: no signals accepted
+   - Transistor in active-online mode: signals processed
+   - Allows operator control over system responsiveness
+   - Time-reversal detection prevents replay attacks
+
+3. Time-Distributed Autonomous Operation
+   Safe execution of complex robotic tasks:
+   - Break large tasks into manageable fractions
+   - Schedule fractions across time windows
+   - Prevent simultaneous monopolization
+   - Enable graceful degradation under load
+
+---
+
+MODULE 4: INTEGRATED ROBOTICS SYSTEMS
+Week 4
+
+Objectives:
+- Design complete autonomous systems
+- Implement safety layers for robot networks
+- Master deployment and monitoring
+
+Capstone Project:
+
+Build a complete autonomous subsystem that:
+1. Receives input signals via intent router
+2. Generates capabilities based on classification
+3. Maintains identity and state awareness
+4. Records all actions in trust registry
+5. Manages security through coherence guards
+6. Executes operations through fractions system
+7. Reports status via operator dashboard
+
+Deployment Checklist:
+☐ All layers initialized and healthy
+☐ Trust registry operational
+☐ Gate lock configured with passkey
+☐ Transistor state management active
+☐ Reverse nanoclocked monitoring enabled
+☐ Engineering fractions system ready
+☐ Operator dashboard accessible
+☐ Health check passing
+
+---
+
+CONTINUOUS LEARNING RESOURCES
+
+1. Intent Layer Documentation
+   - routing.py: signal routing logic
+   - classifier.py: intent classification
+   - field_monitor/: real-time field state tracking
+
+2. Security Layer Advanced Topics
+   - coherence_guard.py: self-healing protocols
+   - transistor_resistor.py: signal path control
+   - reverse_nanoclocked.py: time-safety
+
+3. Trust System Deep Dive
+   - trust_registry.py: audit trail implementation
+   - Record types and verification mechanisms
+   - Integration patterns across subsystems
+
+4. Autonomous Operation Patterns
+   - Engineering fractions: task decomposition
+   - Time-distributed scheduling
+   - Progress tracking and reporting
+
+---
+
+HANDS-ON EXERCISES
+
+Exercise 1: Signal Routing
+Trace a signal through the intent router. Understand classification, routing, and dispatch.
+
+Exercise 2: Trust Record Creation
+Issue and verify trust records. Understand integrity hashing and audit trails.
+
+Exercise 3: Gate Lock Verification
+Configure a gate lock with passkey. Practice signal verification and access control.
+
+Exercise 4: Fraction Scheduling
+Transform a complex operation. Schedule fractions and monitor execution progress.
+
+Exercise 5: System Health Check
+Run comprehensive health checks. Interpret telemetry and identify system state.
+
+---
+
+ASSESSMENT CRITERIA
+
+Knowledge:
+- Understand signal-driven architecture principles
+- Know trust registry implementation details
+- Grasp security layer self-healing mechanisms
+- Understand fractions system and time-distribution
+
+Skills:
+- Configure gate locks and passkeys
+- Monitor system health and telemetry
+- Manage autonomous operations safely
+- Troubleshoot subsystem failures
+
+Certification:
+Upon completion, students will be able to:
+- Deploy Project: Kangaroo autonomous systems
+- Monitor and maintain distributed robot networks
+- Implement custom autonomous subsystems
+- Design safety-critical robot behaviors
+
+---
+
+COURSE COMPLETION DATE: Ongoing
+NEXT COHORT STARTS: May 1, 2026

@@ -1,0 +1,22 @@
+# Pseudocode for Fibonacci Ovoid Tunneling
+def generate_ovoid_staircase(led_matrix, time_step):
+    phi = (1 + 5**0.5) / 2  # The Golden Ratio
+    
+    for led in led_matrix:
+        r, theta = get_polar_coordinates(led)
+        
+        # 1. Calculate Fibonacci Step (The Staircase)
+        # Uses the fractional part of the Golden Ratio to 'quantize' the wave
+        staircase_val = (r * phi) % 1.0
+        
+        # 2. The Wave-Break / Overlap Logic
+        # Frequency (f) increases as it moves toward the center (tunneling)
+        f = (phi**r) * math.sin(time_step + theta)
+        
+        # 3. Spinning Ovoid Geometry
+        # Modulating amplitude based on an elliptical (ovoid) constraint
+        ovoid_constraint = (r**2) / (math.sin(theta) + phi)
+        
+        # 4. Trigger the EM Pulse
+        # High-frequency PWM 'stacks' the waves into a visual staircase
+        led.brightness = pulse_width_modulate(f, staircase_val, ovoid_constraint)

@@ -1,0 +1,182 @@
+#!/usr/bin/env python3
+"""
+Consolidate best code pieces from one or more repos into an output repo,
+protecting originals and harvesting only fruitful files.
+
+Usage:
+  python consolidate.py --sources path/to/repo1 path/to/repo2 --out out_repo --work tmp_workdir
+"""
+
+import argparse
+import json
+import shutil
+import subprocess
+import tempfile
+from pathlib import Path
+from typing import Dict, List
+
+# ---------- Configurable scoring weights ----------
+WEIGHTS = {
+    "tests": 0.4,        # score from running tests touching the file (0-1)
+    "lint": 0.2,         # 1 - (flake8_errors / threshold)
+    "complexity": 0.2,   # lower complexity -> higher score
+    "usage": 0.2,        # heuristic: imports in other files / total files
+}
+FLAKE8_THRESHOLD = 5    # errors above this reduce lint score
+RADON_CC_MAX = 10       # complexity >= this is bad
+
+# ---------- Helpers ----------
+def run(cmd, cwd=None, capture=False):
+    return subprocess.run(cmd, shell=True, cwd=cwd, capture_output=capture, text=True)
+
+def ensure_dir(p: Path):
+    p.mkdir(parents=True, exist_ok=True)
+
+# ---------- Analysis functions ----------
+def lint_score(file_path: Path, repo_root: Path) -> float:
+    # Run flake8 for that single file
+    res = run(f"flake8 {file_path}", cwd=repo_root, capture=True)
+    errs = len(res.stdout.strip().splitlines()) if res.stdout.strip() else 0
+    score = max(0.0, 1.0 - (errs / max(FLAKE8_THRESHOLD, errs or 1)))
+    return float(score)
+
+def complexity_score(file_path: Path) -> float:
+    # Use radon cc for cyclomatic complexity
+    res = run(f"radon cc {file_path} -s -j", capture=True)
+    if res.returncode != 0 or not res.stdout:
+        return 0.5
+    try:
+        import math, json as _json
+        data = _json.loads(res.stdout)
+        # average complexity of functions in the file
+        vals = []
+        for _, items in data.items():
+            for it in items:
+                vals.append(it.get("complexity", RADON_CC_MAX))
+        if not vals:
+            return 1.0
+        avg = sum(vals) / len(vals)
+        score = max(0.0, 1.0 - ((avg - 1) / max(RADON_CC_MAX, avg)))
+        return float(score)
+    except Exception:
+        return 0.5
+
+def test_score_for_file(file_path: Path, repo_root: Path, work_dir: Path) -> float:
+    # Heuristic: Run pytest selecting tests that mention the module name.
+    # This is expensive; an alternative is to count tests that import it.
+    module_name = file_path.stem
+    # Run pytest -k with module name; capture exit code
+    res = run(f"pytest -q -k {module_name}", cwd=repo_root, capture=True)
+    # Interpret: exit code 0 => full green (score 1), else scaled by passed/total if output available
+    if res.returncode == 0:
+        return 1.0
+    if res.stdout:
+        out = res.stdout
+        # look for "passed X failed Y"
+        import re
+        m = re.search(r"(\d+) passed,? ?(\d+)? failed?", out)
+        if m:
+            passed = int(m.group(1))
+            failed = int(m.group(2) or 0)
+            total = passed + failed
+            if total == 0:
+                return 0.0
+            return passed / total
+    return 0.0
+
+def usage_score(file_path: Path, repo_root: Path) -> float:
+    # Count imports referencing the module across the repo (very simple heuristic)
+    name = file_path.stem
+    count = 0
+    total = 0
+    for p in repo_root.rglob("*.py"):
+        total += 1
+        try:
+            txt = p.read_text(encoding="utf8", errors="ignore")
+            if f"import {name}" in txt or f"from {name} import" in txt:
+                count += 1
+        except Exception:
+            continue
+    if total == 0:
+        return 0.0
+    return min(1.0, count / max(1, total/10))  # normalize: >10% files referencing => 1.0
+
+def score_file(file_path: Path, repo_root: Path, work_dir: Path) -> Dict:
+    scores = {}
+    scores["lint"] = lint_score(file_path, repo_root)
+    scores["complexity"] = complexity_score(file_path)
+    scores["tests"] = test_score_for_file(file_path, repo_root, work_dir)
+    scores["usage"] = usage_score(file_path, repo_root)
+    total = sum(WEIGHTS[k]*scores[k] for k in WEIGHTS)
+    return {"path": str(file_path.relative_to(repo_root)), "scores": scores, "total": total}
+
+# ---------- Consolidation logic ----------
+def consolidate(sources: List[Path], out_dir: Path, work_dir: Path, threshold: float=0.5, extensions=(".py", ".js", ".go")):
+    ensure_dir(out_dir)
+    ensure_dir(work_dir)
+    results = []
+
+    for src in sources:
+        repo = Path(src).resolve()
+        print(f"Analyzing repo {repo}...")
+        # copy to work area to avoid touching originals
+        local_copy = work_dir / repo.name
+        if local_copy.exists():
+            shutil.rmtree(local_copy)
+        shutil.copytree(repo, local_copy)
+        # optional: run dependency install or setup here
+
+        for p in local_copy.rglob("*"):
+            if p.is_file() and p.suffix in extensions:
+                res = score_file(p, local_copy, work_dir)
+                res["source_repo"] = str(repo)
+                results.append(res)
+
+    # sort by score descending
+    results.sort(key=lambda r: r["total"], reverse=True)
+
+    # harvest files above threshold into out_dir, preserve relative path and provenance
+    harvested = []
+    for r in results:
+        if r["total"] >= threshold:
+            src_repo = Path(r["source_repo"])
+            rel = Path(r["path"])
+            src_path = work_dir / src_repo.name / rel
+            dest_path = out_dir / src_repo.name / rel
+            ensure_dir(dest_path.parent)
+            shutil.copy2(src_path, dest_path)
+            harvested.append(r)
+
+    # write metadata
+    meta = {
+        "threshold": threshold,
+        "harvested_count": len(harvested),
+        "harvested": harvested,
+    }
+    (out_dir / "consolidation_metadata.json").write_text(json.dumps(meta, indent=2))
+    print(f"Harvested {len(harvested)} files into {out_dir}")
+    return meta
+
+# ---------- CLI ----------
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--sources", nargs="+", required=True)
+    ap.add_argument("--out", required=True)
+    ap.add_argument("--work", default=None)
+    ap.add_argument("--threshold", type=float, default=0.5)
+    args = ap.parse_args()
+
+    work = Path(args.work) if args.work else Path(tempfile.mkdtemp(prefix="consol_work_"))
+    out = Path(args.out)
+    sources = [Path(s) for s in args.sources]
+    meta = consolidate(sources, out, work, threshold=args.threshold)
+    print(json.dumps(meta, indent=2))
+
+if __name__ == "__main__":
+    main()
+
+MIT License
+Copyright 2026 joe solares castaneda jr.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+...

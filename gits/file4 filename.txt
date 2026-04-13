@@ -1,0 +1,1 @@
+A small verify_status.py that checks signature and integrity hash before accepting status.json:

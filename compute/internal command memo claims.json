@@ -1,0 +1,33 @@
+{
+  "$id": "https://example.local/schemas/command-memo.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CommandMemoClaims",
+  "type": "object",
+  "required": ["iss", "transactionId", "operatorId", "companionId", "action", "iat", "exp", "nonce", "sigAlgo"],
+  "properties": {
+    "iss": { "type": "string", "description": "Issuer identifier (Command Authority)" },
+    "transactionId": { "type": "string", "pattern": "^[A-Fa-f0-9]{64}$" },
+    "operatorId": { "type": "string" },
+    "companionId": { "type": "string" },
+    "action": { "type": "string", "description": "Requested action (e.g., OPEN_INNER_GATE)" },
+    "parameters": { "type": "object", "additionalProperties": true },
+    "iat": { "type": "integer", "description": "issued-at (unix epoch seconds)" },
+    "exp": { "type": "integer", "description": "expiry (unix epoch seconds, short-lived)" },
+    "nonce": { "type": "string", "description": "repeat of transactionId or random nonce bound to transaction" },
+    "policyVersion": { "type": "string" },
+    "sigAlgo": { "type": "string", "description": "Signature algorithm identifier (e.g., RS256, ES256)" },
+    "signers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["signerId", "signature"],
+        "properties": {
+          "signerId": { "type": "string" },
+          "signature": { "type": "string", "description": "base64url-encoded signature over canonicalized claims" },
+          "signedAt": { "type": "integer" }
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

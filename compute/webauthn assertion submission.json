@@ -1,0 +1,23 @@
+{
+  "$id": "https://example.local/schemas/webauthn-assertion.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "WebAuthnAssertionSubmission",
+  "type": "object",
+  "required": ["transactionId", "credentialId", "clientDataJSON", "authenticatorData", "signature", "userHandle"],
+  "properties": {
+    "transactionId": { "type": "string", "pattern": "^[A-Fa-f0-9]{64}$" },
+    "credentialId": { "type": "string", "description": "base64url-encoded credential ID" },
+    "clientDataJSON": { "type": "string", "description": "base64url-encoded clientDataJSON" },
+    "authenticatorData": { "type": "string", "description": "base64url-encoded authenticatorData (authData)" },
+    "signature": { "type": "string", "description": "base64url-encoded signature bytes" },
+    "userHandle": { "type": ["string", "null"], "description": "base64url user handle if present" },
+    "attestationType": { "type": ["string", "null"], "enum": ["none","packed","tpm","android-key","android-safetynet",null], "description": "optional attestation type" },
+    "clientIPHash": { "type": "string", "description": "optional hash of client IP for correlation" },
+    "devicePosture": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "optional device posture snapshot submitted by client"
+    }
+  },
+  "additionalProperties": false
+}

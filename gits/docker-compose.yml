@@ -1,0 +1,11 @@
+version: "3.8"
+services:
+  harvester:
+    build: .
+    ports: ["5000:5000"]
+    environment:
+      - HARVESTER_SECRET=${HARVESTER_SECRET}
+      - TOKEN_TTL=600
+    volumes:
+      - ./:/workspace
+      - ./audit.log:/workspace/audit.log

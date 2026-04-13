@@ -1,0 +1,13 @@
+{
+  "domains": {
+    "iris": {
+      "events": [],
+      "state": "stable"
+    },
+    "voice": {
+      "events": [],
+      "state": "stable"
+    }
+  },
+  "tamper_detected": false
+}

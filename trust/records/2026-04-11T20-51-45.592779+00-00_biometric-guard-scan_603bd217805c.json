@@ -1,0 +1,29 @@
+{
+  "record_type": "biometric-guard-scan",
+  "source": "BiometricFlagGuard",
+  "payload": {
+    "domains": {
+      "iris": {
+        "events": [
+          {
+            "event": "corrected-working-file",
+            "file": "README.md"
+          }
+        ],
+        "state": "reconstructed"
+      },
+      "voice": {
+        "events": [
+          {
+            "event": "corrected-working-file",
+            "file": "README.md"
+          }
+        ],
+        "state": "reconstructed"
+      }
+    },
+    "tamper_detected": true
+  },
+  "created_at": "2026-04-11T20:51:45.592779+00:00",
+  "integrity_hash": "603bd217805cc4d0773f0e12c62942b56b6f2f9321636f0c8c1528ef26fc297e"
+}

@@ -1,0 +1,18 @@
+from bs4 import BeautifulSoup
+
+# 1. Open and read the local file
+with open("file:///C:/Users/Ken%20Bradford/Downloads/App%20Concept%20Breakdown%20mverse-py%20codes.html", "r", encoding="utf-8") as file:
+    content = file.read()
+
+# 2. Parse the HTML content
+soup = BeautifulSoup(content, 'html.parser')
+
+# 3. Extract specific data
+print("--- System Output ---")
+print("Title Tag:", soup.title.string)
+print("Main Heading:", soup.h1.text)
+print("Paragraph Text:", soup.find('p', class_='content').text)
+
+print("\nList Items:")
+for li in soup.find_all('li'):
+    print(f"- {li.text}")

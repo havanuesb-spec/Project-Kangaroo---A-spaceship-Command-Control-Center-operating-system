@@ -1,0 +1,86 @@
+import time
+import threading
+from PIL import Image
+import pyscreenshot as ImageGrab
+import pygame
+import keyboard
+import sys
+import os
+
+# Config
+DECOY_FILE = "decoy.jpg"
+FPS = 10           # frames per second (recommended 5-15)
+SHOW_DECOY_FIRST = True
+
+if not os.path.isfile(DECOY_FILE):
+    print("Place decoy.jpg in the same folder.")
+    sys.exit(1)
+
+pygame.init()
+info = pygame.display.Info()
+WIDTH, HEIGHT = info.current_w, info.current_h
+screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.FULLSCREEN)
+pygame.mouse.set_visible(False)
+
+# Load decoy image scaled to screen
+decoy_img = Image.open(DECOY_FILE).convert("RGB")
+decoy_img = decoy_img.resize((WIDTH, HEIGHT), Image.LANCZOS)
+decoy_surface = pygame.image.fromstring(decoy_img.tobytes(), decoy_img.size, decoy_img.mode)
+
+running = True
+paused = False
+show_decoy = SHOW_DECOY_FIRST
+lock = threading.Lock()
+
+def capture_screen_surface():
+    im = ImageGrab.grab()
+    im = im.convert("RGB").resize((WIDTH, HEIGHT), Image.LANCZOS)
+    return pygame.image.fromstring(im.tobytes(), im.size, im.mode)
+
+# Pre-capture first frame
+desktop_surface = capture_screen_surface()
+
+def alternator_loop():
+    global desktop_surface, show_decoy
+    interval = 1.0 / FPS
+    while running:
+        start = time.time()
+        if not paused:
+            if show_decoy:
+                screen.blit(decoy_surface, (0, 0))
+            else:
+                # update desktop capture
+                desktop_surface = capture_screen_surface()
+                screen.blit(desktop_surface, (0, 0))
+            pygame.display.flip()
+            show_decoy = not show_decoy
+        elapsed = time.time() - start
+        to_sleep = interval - elapsed
+        if to_sleep > 0:
+            time.sleep(to_sleep)
+
+# Hotkeys: Space toggles pause/run; Esc quits immediately
+def hotkey_listener():
+    global running, paused
+    keyboard.add_hotkey("space", lambda: toggle_pause())
+    keyboard.add_hotkey("esc", lambda: stop_running())
+    # block until stopped
+    while running:
+        time.sleep(0.1)
+
+def toggle_pause():
+    global paused
+    with lock:
+        paused = not paused
+
+def stop_running():
+    global running
+    with lock:
+        running = False
+
+t = threading.Thread(target=alternator_loop, daemon=True)
+t.start()
+try:
+    hotkey_listener()
+finally:
+    pygame.quit()

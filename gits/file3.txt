@@ -1,0 +1,12 @@
+#!/bin/sh
+# add Signed-off-by if git config user.name/email present and not already present
+if git rev-parse --git-dir >/dev/null 2>&1; then
+  if ! grep -iq "Signed-off-by:" "$1"; then
+    name=$(git config user.name)
+    email=$(git config user.email)
+    if [ -n "$name" ] && [ -n "$email" ]; then
+      echo "" >> "$1"
+      echo "Signed-off-by: $name <$email>" >> "$1"
+    fi
+  fi
+fi

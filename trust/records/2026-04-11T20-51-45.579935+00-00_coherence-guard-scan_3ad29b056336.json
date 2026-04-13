@@ -1,0 +1,18 @@
+{
+  "record_type": "coherence-guard-scan",
+  "source": "CoherenceGuard",
+  "payload": {
+    "events": [
+      {
+        "event": "corrected-working-file",
+        "file": "heuristics_profile.json"
+      }
+    ],
+    "canonical_count": 1,
+    "working_count": 1,
+    "tamper_detected": true,
+    "coherence_state": "reconstructed"
+  },
+  "created_at": "2026-04-11T20:51:45.579935+00:00",
+  "integrity_hash": "3ad29b056336c105333616c2d5ae1946bef0202f69d8e8695a2c7b94658cef1e"
+}

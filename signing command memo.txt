@@ -1,0 +1,16 @@
+function signMemo(memoClaims, signerKeyRef, sigAlgo = "ES256"):
+    // memoClaims: JSON object per schema (no signature fields yet)
+    // signerKeyRef: reference to HSM-backed key or local private key
+    canonical = canonicalizeJSON(memoClaims)
+    if sigAlgo == "ES256":
+        digest = SHA256(canonical)
+        signature = HSM_sign_ECDSA_P256(signerKeyRef, digest) // returns raw R||S or DER
+    else if sigAlgo == "RS256" or "PS256":
+        digest = SHA256(canonical)
+        signature = HSM_sign_RSA(signerKeyRef, digest, padding_for_algo)
+    signature_b64 = base64url_encode(signature)
+    signerEntry = { "signerId": signerKeyRef.id, "signature": signature_b64, "signedAt": current_unix() }
+    if memoClaims.signers is undefined:
+        memoClaims.signers = []
+    memoClaims.signers.append(signerEntry)
+    return memoClaims

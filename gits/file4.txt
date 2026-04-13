@@ -1,0 +1,18 @@
+#!/usr/bin/env python3
+import json, subprocess, sys, hashlib
+from pathlib import Path
+
+def run(cmd): return subprocess.run(cmd, shell=True, capture_output=True, text=True)
+s = json.loads(Path("status.json").read_text())
+sig = run("gpg --verify status.json.asc status.json")
+if sig.returncode != 0:
+    print("Signature invalid", file=sys.stderr); sys.exit(1)
+# verify integrity
+h = hashlib.sha256()
+for p in sorted(Path(".").rglob("*")):
+    if p.is_file():
+        h.update(str(p.relative_to(Path("."))).encode()); h.update(b"\0")
+        h.update(p.read_bytes()); h.update(b"\0")
+if h.hexdigest() != s.get("integrity_hash"):
+    print("Integrity mismatch", file=sys.stderr); sys.exit(1)
+print("Status signature and integrity OK")

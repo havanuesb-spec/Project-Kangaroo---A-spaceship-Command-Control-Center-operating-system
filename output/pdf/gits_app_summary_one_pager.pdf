@@ -1,0 +1,73 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+3 0 obj
+<< /Type /Pages /Kids [5 0 R] /Count 1 >>
+endobj
+4 0 obj
+<< /Length 3244 >>
+stream
+0.12 0.16 0.24 rg
+36 744 540 28 re f
+0 0 0 rg
+BT /F2 18 Tf 1 0 0 1 48 752 Tm (Repo App Summary) Tj ET
+BT /F2 12 Tf 1 0 0 1 42 726 Tm (What It Is) Tj ET
+BT /F1 9 Tf 1 0 0 1 50 708 Tm (- A small repo-hosted control layer for temporary edit sessions and audited repo) Tj ET
+BT /F1 9 Tf 1 0 0 1 50 696 Tm (  operations.) Tj ET
+BT /F1 9 Tf 1 0 0 1 50 684 Tm (- The main service in gits/server/harvester.js issues JWTs, logs session events, and runs) Tj ET
+BT /F1 9 Tf 1 0 0 1 50 672 Tm (  allowlisted commands in a Docker sandbox.) Tj ET
+BT /F2 12 Tf 1 0 0 1 42 624 Tm (Who It's For) Tj ET
+BT /F1 9 Tf 1 0 0 1 50 606 Tm (- Primary persona \(inferred\): developers or repo maintainers who want a tracked edit) Tj ET
+BT /F1 9 Tf 1 0 0 1 50 594 Tm (  session and restricted, auditable automation around a workspace.) Tj ET
+BT /F2 12 Tf 1 0 0 1 42 546 Tm (What It Does) Tj ET
+BT /F1 9 Tf 1 0 0 1 50 528 Tm (- Issues short-lived JWT edit-session tokens via /enter and /exit endpoints.) Tj ET
+BT /F1 9 Tf 1 0 0 1 50 516 Tm (- Stores the local token in .edit_token and wires a commit-msg hook during edit mode.) Tj ET
+BT /F1 9 Tf 1 0 0 1 50 504 Tm (- Appends JSON audit entries for enter, exit, and run events to audit.log.) Tj ET
+BT /F1 9 Tf 1 0 0 1 50 492 Tm (- Optionally signs audit lines or audit digests with GPG when available.) Tj ET
+BT /F1 9 Tf 1 0 0 1 50 480 Tm (- Allowlists only lint, tests, and harvest operations on the /run endpoint.) Tj ET
+BT /F1 9 Tf 1 0 0 1 50 468 Tm (- Executes those operations in an ephemeral Docker container with no network and a) Tj ET
+BT /F1 9 Tf 1 0 0 1 50 456 Tm (  read-only workspace mount.) Tj ET
+BT /F2 12 Tf 1 0 0 1 42 408 Tm (How It Works) Tj ET
+BT /F1 9 Tf 1 0 0 1 50 390 Tm (- Client scripts in gits/client call the harvester service on localhost:5000.) Tj ET
+BT /F1 9 Tf 1 0 0 1 50 378 Tm (- The harvester service validates JWTs, rate-limits requests, and records audit metadata.) Tj ET
+BT /F1 9 Tf 1 0 0 1 50 366 Tm (- For /run, it builds a docker run command using node:18, --network none, --read-only, and) Tj ET
+BT /F1 9 Tf 1 0 0 1 50 354 Tm (  a /workspace:ro mount.) Tj ET
+BT /F1 9 Tf 1 0 0 1 50 342 Tm (- docker-compose.yml exposes port 5000, injects HARVESTER_SECRET and TOKEN_TTL, and mounts) Tj ET
+BT /F1 9 Tf 1 0 0 1 50 330 Tm (  the repo plus audit.log.) Tj ET
+BT /F1 9 Tf 1 0 0 1 50 318 Tm (- Related auth/audit server variant: gits/server.js. Frontend UI: Not found in repo.) Tj ET
+BT /F1 9 Tf 1 0 0 1 50 306 Tm (  Persistent database: Not found in repo.) Tj ET
+BT /F2 12 Tf 1 0 0 1 42 258 Tm (How To Run) Tj ET
+BT /F1 9 Tf 1 0 0 1 50 240 Tm (- cd gits) Tj ET
+BT /F1 9 Tf 1 0 0 1 50 228 Tm (- Set HARVESTER_SECRET in the environment, then run docker compose up --build) Tj ET
+BT /F1 9 Tf 1 0 0 1 50 216 Tm (- Start a session: ./client/enter-edit-mode.sh "<user>") Tj ET
+BT /F1 9 Tf 1 0 0 1 50 204 Tm (- Run an allowlisted op: ./client/harvest-run.sh lint | tests | harvest) Tj ET
+BT /F1 9 Tf 1 0 0 1 50 192 Tm (- Finish the session: ./client/exit-edit-mode.sh) Tj ET
+BT /F1 9 Tf 1 0 0 1 50 180 Tm (- Dockerfile/package manifest/install doc for this service: Not found in repo.) Tj ET
+BT /F1 8 Tf 1 0 0 1 42 26 Tm (Output: C:\\Multiverse\\output\\pdf\\gits_app_summary_one_pager.pdf) Tj ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 3 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 4 0 R >>
+endobj
+6 0 obj
+<< /Type /Catalog /Pages 3 0 R >>
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000015 00000 n 
+0000000085 00000 n 
+0000000160 00000 n 
+0000000217 00000 n 
+0000003512 00000 n 
+0000003648 00000 n 
+trailer
+<< /Size 7 /Root 6 0 R >>
+startxref
+3697
+%%EOF

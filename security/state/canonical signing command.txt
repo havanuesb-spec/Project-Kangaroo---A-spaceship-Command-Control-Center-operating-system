@@ -1,0 +1,9 @@
+function canonicalizeJSON(obj):
+    // Implement JSON Canonicalization Scheme (RFC 8785) or equivalent
+    // Steps:
+    // 1. Serialize numbers, booleans, null as per JSON
+    // 2. Strings escaped per JSON minimal escaping
+    // 3. Sort object keys lexicographically (byte-wise)
+    // 4. No insignificant whitespace
+    // 5. For arrays, keep order
+    return utf8_bytes_of_canonical_json

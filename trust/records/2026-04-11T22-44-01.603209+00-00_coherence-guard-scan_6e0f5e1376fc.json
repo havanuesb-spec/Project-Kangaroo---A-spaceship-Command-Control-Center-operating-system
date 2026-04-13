@@ -1,0 +1,13 @@
+{
+  "record_type": "coherence-guard-scan",
+  "source": "CoherenceGuard",
+  "payload": {
+    "events": [],
+    "canonical_count": 1,
+    "working_count": 1,
+    "tamper_detected": false,
+    "coherence_state": "stable"
+  },
+  "created_at": "2026-04-11T22:44:01.603209+00:00",
+  "integrity_hash": "6e0f5e1376fcf2189de2df12748d3c2639419a69cd40c546a96519e50e284c3f"
+}

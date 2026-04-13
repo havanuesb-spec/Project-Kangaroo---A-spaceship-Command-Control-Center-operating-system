@@ -1,0 +1,10 @@
+{
+  "program_name": "heuristics-feedback",
+  "mode": "canonical",
+  "coherence_model": "consistency-and-distortion-risk",
+  "restoration_policy": "bidirectional-repair",
+  "notes": [
+    "This system estimates coherence signals and reconstruction priority.",
+    "It is not a factual truth oracle."
+  ]
+}

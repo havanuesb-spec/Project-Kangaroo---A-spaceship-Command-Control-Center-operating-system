@@ -1,0 +1,5 @@
+python-dotenv
+locust
+requests
+matplotlib
+numpy

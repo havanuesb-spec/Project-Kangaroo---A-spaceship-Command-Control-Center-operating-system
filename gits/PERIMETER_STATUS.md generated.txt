@@ -1,0 +1,11 @@
+## Perimeter Status (generated)
+Repo: my-repo
+Commit: abcd1234
+Branch: main
+Timestamp: 2026-03-25T12:34:56Z
+CI: passing/unknown
+License: MIT
+Connected actors:
+- core-node (role: central)
+- mirror-a (role: mirror)
+Integrity SHA256: <hash>

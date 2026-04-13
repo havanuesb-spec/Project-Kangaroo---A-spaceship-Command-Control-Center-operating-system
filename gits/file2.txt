@@ -1,0 +1,14 @@
+name: License Check
+on: [pull_request, push]
+
+jobs:
+  license:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install reuse tool
+        run: |
+          pip install reuse
+      - name: Run reuse lint
+        run: |
+          reuse lint || (echo "Run 'reuse lint' locally and fix." && exit 1)

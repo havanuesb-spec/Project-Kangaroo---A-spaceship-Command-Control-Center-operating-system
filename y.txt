@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Time Cube</title>
+  <style>
+    body { margin: 0; overflow: hidden; background: black; }
+  </style>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
+
+<script>
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer();
+
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+
+// Cube
+const geometry = new THREE.BoxGeometry();
+const material = new THREE.MeshBasicMaterial({ color: 0x00ffcc, wireframe: true });
+const cube = new THREE.Mesh(geometry, material);
+scene.add(cube);
+
+camera.position.z = 3;
+
+// TIME VARIABLES
+let speed = 0.5;
+let mode = "forward"; // forward, reverse, slow
+
+function animate() {
+    requestAnimationFrame(animate);
+
+    let t = Date.now() * 0.001;
+
+    let timeFlow;
+    if (mode === "forward") timeFlow = t;
+    if (mode === "reverse") timeFlow = -t;
+    if (mode === "slow") timeFlow = t * 0.2;
+
+    cube.rotation.x = timeFlow * speed;
+    cube.rotation.y = timeFlow * speed;
+
+    renderer.render(scene, camera);
+}
+
+animate();
+
+// Controls
+window.addEventListener("keydown", (e) => {
+    if (e.key === "1") mode = "forward";
+    if (e.key === "2") mode = "reverse";
+    if (e.key === "3") mode = "slow";
+});
+</script>
+</body>
+</html>

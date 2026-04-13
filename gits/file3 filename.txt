@@ -1,0 +1,1 @@
+Add .githooks/commit-msg or client-side prepare-commit-msg to remind/auto-add Signed-off-by:

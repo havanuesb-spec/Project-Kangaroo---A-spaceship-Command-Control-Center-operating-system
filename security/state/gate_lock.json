@@ -1,0 +1,15 @@
+{
+  "created_at": "2026-04-11T20:51:45.544159+00:00",
+  "locked": true,
+  "passkey_hash": null,
+  "armored_mode": false,
+  "required_fields": [
+    "photon_signal",
+    "sensor_signature",
+    "transmitter_tensor",
+    "led_overlay_mask",
+    "passkey_divulgement"
+  ],
+  "last_attempt": null,
+  "notes": "Gate lock initialized. External access remains locked until a combination signal is verified."
+}
