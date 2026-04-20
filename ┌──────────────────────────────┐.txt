@@ -1,0 +1,15 @@
+                ┌──────────────────────────────┐
+                │   SLOW COGNITIVE LAYER       │
+                │   (50–1000 ms loop)          │
+                │ - Planning                   │
+                │ - Mapping                   │
+                │ - Learning updates          │
+                └────────────┬─────────────────┘
+                             │ shared state
+                             ▼
+┌────────────────────────────────────────────────────────┐
+│              FAST REFLEX LAYER (<10 ms)               │
+│  - perception → inference → actuation                │
+│  - no blocking operations                            │
+│  - deterministic execution                           │
+└────────────────────────────────────────────────────────┘

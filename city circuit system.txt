@@ -1,0 +1,3 @@
+[District A] —— [District B]
+      |              |
+[Power Grid] —— [Transport Layer]

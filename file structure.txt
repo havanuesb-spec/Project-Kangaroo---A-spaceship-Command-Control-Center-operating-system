@@ -1,0 +1,30 @@
+multiverse/
+  core/
+    kernel.ts
+    scheduler.ts
+    eventBus.ts
+
+  ecs/
+    entity.ts
+    components/
+    systems/
+
+  network/
+    node.ts
+    sync.ts
+    protocol.ts
+
+  world/
+    cityCircuit/
+      mapGraph.ts
+      trafficSim.ts
+
+  ai/
+    ghost/
+      ghostCore.ts
+      behaviors.ts
+      migration.ts
+
+  runtime/
+    main.ts
+    

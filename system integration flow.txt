@@ -1,0 +1,13 @@
+BOOT SEQUENCE
+   ↓
+Kernel starts
+   ↓
+Loads ECS world
+   ↓
+Connects network nodes
+   ↓
+Spawns City Circuit
+   ↓
+Deploys Ghost agents
+   ↓
+Starts simulation loop
