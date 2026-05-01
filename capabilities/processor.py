@@ -27,11 +27,16 @@ class ProcessorDecision:
     prompt_fingerprint: str
     normalized_prompt: str
     generated_at: str
+    family: str
+    algorithm: str
+    confidence: float
+    evidence: list[str]
+    execution_mode: str
     safeguards: list[str]
 
 
 class MultiverseProcessor:
-    processor_version = "internal-processor.v2"
+    processor_version = "internal-processor.v3"
 
     def __init__(
         self,
@@ -101,12 +106,25 @@ class MultiverseProcessor:
             prompt_fingerprint=self._fingerprint(prompt),
             normalized_prompt=prompt,
             generated_at=datetime.now(timezone.utc).isoformat(),
+            family=identity.family,
+            algorithm=identity.algorithm,
+            confidence=identity.confidence,
+            evidence=list(identity.evidence),
+            execution_mode=self._execution_mode_for(identity),
             safeguards=[
                 "input-normalized",
                 "capability-name-slugged",
                 "trust-record-issued-before-harvest",
+                "generated-module-exposes-describe-and-execute",
             ],
         )
+
+    def _execution_mode_for(self, identity: MathIdentity) -> str:
+        if identity.confidence >= 0.9:
+            return "high-confidence-generation"
+        if identity.confidence >= 0.75:
+            return "assisted-generation"
+        return "review-first-generation"
 
     def _slug(self, value: str) -> str:
         slug = re.sub(r"[^a-z0-9]+", "_", value.lower()).strip("_")
@@ -126,6 +144,7 @@ CAPABILITY_CONFIDENCE = {identity.confidence!r}
 CAPABILITY_EVIDENCE = {identity.evidence!r}
 PROCESSOR_VERSION = "{decision.processor_version}"
 PROMPT_FINGERPRINT = "{decision.prompt_fingerprint}"
+EXECUTION_MODE = "{decision.execution_mode}"
 
 
 def describe() -> dict[str, object]:
@@ -137,12 +156,14 @@ def describe() -> dict[str, object]:
         "mode": "generated-by-multiverse-processor",
         "processor_version": PROCESSOR_VERSION,
         "prompt_fingerprint": PROMPT_FINGERPRINT,
+        "execution_mode": EXECUTION_MODE,
     }}
 
 
 def execute(payload: dict[str, object] | None = None) -> dict[str, object]:
     return {{
         "status": "ready",
+        "execution_mode": EXECUTION_MODE,
         "capability": describe(),
         "payload": payload or {{}},
     }}

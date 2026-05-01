@@ -1,0 +1,36 @@
+{
+  "record_type": "processor-decision",
+  "source": "MultiverseProcessor",
+  "payload": {
+    "prompt": "Solve a matrix determinant and eigenvalue workflow for a dynamic 11D model.",
+    "normalized_prompt": "Solve a matrix determinant and eigenvalue workflow for a dynamic 11D model.",
+    "family": "linear-algebra",
+    "algorithm": "matrix-operator",
+    "confidence": 0.93,
+    "evidence": [
+      "matrix vocabulary"
+    ],
+    "decision": {
+      "capability_name": "linear_algebra_matrix_operator_matrix_vocabulary",
+      "processor_version": "internal-processor.v3",
+      "prompt_fingerprint": "3ae9712dc10271c5",
+      "normalized_prompt": "Solve a matrix determinant and eigenvalue workflow for a dynamic 11D model.",
+      "generated_at": "2026-05-01T22:34:09.662471+00:00",
+      "family": "linear-algebra",
+      "algorithm": "matrix-operator",
+      "confidence": 0.93,
+      "evidence": [
+        "matrix vocabulary"
+      ],
+      "execution_mode": "high-confidence-generation",
+      "safeguards": [
+        "input-normalized",
+        "capability-name-slugged",
+        "trust-record-issued-before-harvest",
+        "generated-module-exposes-describe-and-execute"
+      ]
+    }
+  },
+  "created_at": "2026-05-01T22:34:09.672411+00:00",
+  "integrity_hash": "46053d09018ea089b2fd6e5eccab48b0fda030b9c02e38792798ec8dec330455"
+}

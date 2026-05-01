@@ -1,0 +1,17 @@
+{
+  "record_type": "capability-harvest",
+  "source": "CapabilityHarvester",
+  "payload": {
+    "capability_name": "linear_algebra_matrix_operator_matrix_vocabulary",
+    "target_path": "C:\\Multiverse\\capabilities\\harvests\\linear_algebra_matrix_operator_matrix_vocabulary.py",
+    "metadata": {
+      "derived_from": "MultiverseProcessor",
+      "processor_version": "internal-processor.v3",
+      "trust_context": "46053d09018ea089b2fd6e5eccab48b0fda030b9c02e38792798ec8dec330455",
+      "prompt_fingerprint": "3ae9712dc10271c5"
+    },
+    "bytes_written": 968
+  },
+  "created_at": "2026-05-01T22:34:09.709635+00:00",
+  "integrity_hash": "6a7ff0c02f8f893cdd4ffffcca20ec7374a19c105990910d8695c5c6692142b3"
+}
