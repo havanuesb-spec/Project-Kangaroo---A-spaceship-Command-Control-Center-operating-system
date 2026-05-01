@@ -1,5 +1,8 @@
 from dataclasses import dataclass, asdict
 from copy import deepcopy
+import logging
+
+logger = logging.getLogger(__name__)
 
 @dataclass
 class HealthMetrics:
@@ -38,6 +41,7 @@ class HealthRecord:
         }
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO)
     may_2019_baseline = HealthMetrics(
         weight_kg=78.4,
         resting_hr=62,
@@ -49,7 +53,7 @@ if __name__ == "__main__":
 
     record = HealthRecord("Joe", may_2019_baseline)
     record.update_current(weight_kg=83.1, resting_hr=71, sleep_hours=6.1)
-    print("Before restore:", record.snapshot()["current"])
+    logger.info("Before restore: %s", record.snapshot()["current"])
 
     record.restore_to_baseline()
-    print("After restore:", record.snapshot()["current"])
+    logger.info("After restore: %s", record.snapshot()["current"])
