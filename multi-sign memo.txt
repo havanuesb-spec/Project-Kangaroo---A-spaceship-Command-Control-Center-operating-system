@@ -3,5 +3,5 @@ function multisignMemo(memoClaims, signerKeyRefs[], sigAlgo):
         // Optionally require each signer to sign the canonical memo independently;
         // or require sequential signing and include prior signatures in canonicalization,
         // but simplest: each signs the same canonical memo.
-        memoClaims = signMemo(memoClaims, keyRef, sigAlgo)
+        memoClaims = signMemo(memoClaims,    keyRef, sigAlgo)
     return memoClaims

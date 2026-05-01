@@ -1,0 +1,286 @@
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    color: #21313f;
+    line-height: 1.5;
+    background: #f5f5f5;
+}
+
+button {
+    font: inherit;
+}
+
+.app-shell {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 32px 20px 40px;
+}
+
+.hero {
+    margin-bottom: 24px;
+}
+
+.eyebrow {
+    margin: 0 0 8px;
+    color: #007acc;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.hero h1 {
+    margin: 0 0 10px;
+    color: #1a2a37;
+    font-size: clamp(2rem, 4vw, 3rem);
+    border-bottom: 2px solid #007acc;
+    padding-bottom: 10px;
+}
+
+.hero-copy {
+    max-width: 44rem;
+    margin: 0;
+    color: #41586b;
+}
+
+.game-layout {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: minmax(0, 1.7fr) minmax(260px, 0.9fr);
+    align-items: start;
+}
+
+.panel {
+    background: #ffffff;
+    border: 1px solid #d5dee6;
+    border-radius: 18px;
+    box-shadow: 0 16px 36px rgba(26, 42, 55, 0.08);
+}
+
+.panel--game {
+    padding: 20px;
+}
+
+.panel--info {
+    padding: 22px 20px;
+}
+
+.panel--info h2 {
+    margin: 0 0 14px;
+    color: #1a2a37;
+}
+
+.hud {
+    display: flex;
+    gap: 16px;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 18px;
+}
+
+.status-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(92px, 1fr));
+    gap: 12px;
+    flex: 1;
+}
+
+.status-card {
+    padding: 12px 14px;
+    background: #eef5fb;
+    border: 1px solid #c7ddef;
+    border-radius: 14px;
+}
+
+.status-card strong {
+    display: block;
+    margin-top: 2px;
+    color: #11314c;
+    font-size: 1.45rem;
+}
+
+.status-card__label {
+    color: #4d6579;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.hud-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.button,
+.control-button {
+    border: 1px solid #90b6d1;
+    border-radius: 12px;
+    background: #ffffff;
+    color: #11314c;
+    cursor: pointer;
+    transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+
+.button {
+    padding: 10px 14px;
+    min-width: 104px;
+}
+
+.button:hover,
+.control-button:hover {
+    background: #eef5fb;
+    border-color: #007acc;
+}
+
+.button:active,
+.control-button:active {
+    transform: translateY(1px);
+}
+
+.button--primary {
+    background: #007acc;
+    border-color: #007acc;
+    color: #ffffff;
+}
+
+.button--primary:hover {
+    background: #0063a4;
+}
+
+.board-shell {
+    position: relative;
+    width: min(100%, 430px);
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(9, minmax(0, 1fr));
+    gap: 4px;
+    padding: 12px;
+    background: #d9e8f2;
+    border-radius: 18px;
+    border: 1px solid #bdd3e3;
+}
+
+.cell {
+    aspect-ratio: 1;
+    border-radius: 8px;
+    background: #f8fbfd;
+    border: 1px solid rgba(17, 49, 76, 0.08);
+}
+
+.cell--hazard {
+    background: #5f6f7d;
+}
+
+.cell--beacon {
+    background: #f0bb3c;
+}
+
+.cell--pilot {
+    background: #007acc;
+}
+
+.cell--crash {
+    background: #d84e4e;
+}
+
+.board-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    text-align: center;
+    color: #11314c;
+    font-weight: 700;
+    background: rgba(245, 248, 250, 0.82);
+    border-radius: 18px;
+}
+
+.board-overlay[hidden] {
+    display: none;
+}
+
+.flight-status {
+    margin: 14px 0 0;
+    color: #4d6579;
+    font-size: 0.95rem;
+}
+
+.rules-list {
+    margin: 0 0 22px;
+    padding-left: 18px;
+    color: #41586b;
+}
+
+.rules-list li + li {
+    margin-top: 8px;
+}
+
+.touch-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.touch-controls__row {
+    display: flex;
+    gap: 10px;
+}
+
+.control-button {
+    min-width: 76px;
+    padding: 12px 14px;
+    touch-action: manipulation;
+}
+
+.control-button--up {
+    min-width: 110px;
+}
+
+@media (max-width: 860px) {
+    .game-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .panel--info {
+        order: 2;
+    }
+}
+
+@media (max-width: 620px) {
+    .app-shell {
+        padding-inline: 14px;
+    }
+
+    .hud {
+        flex-direction: column;
+    }
+
+    .status-grid {
+        width: 100%;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .hud-actions {
+        width: 100%;
+    }
+
+    .button {
+        flex: 1;
+    }
+
+    .board-shell {
+        width: 100%;
+    }
+
+    .control-button {
+        min-width: 68px;
+    }
+}

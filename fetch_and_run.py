@@ -1,11 +1,11 @@
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup # pyright: ignore[reportMissingImports]
 import subprocess
 import tempfile
 import os
 
 
-URL = c:\Multiverse\jscjr_multiverse.pys/App%20Concept%20Breakdown%20mverse-py%20codes.html"  # <-- change this
+URL = "c:\\Multiverse\\jscjr_multiverse.pys/App%20Concept%20Breakdown%20mverse-py%20codes.html"  # <-- change this
 
 
 def get_python_code(url):

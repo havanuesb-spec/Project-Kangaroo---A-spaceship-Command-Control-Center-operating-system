@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Aerospace Resurgence: Flight Success Analysis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Chosen Palette: Warm Neutrals with Muted Teal and Terracotta Accents -->
+    <!-- Application Structure Plan: The SPA is structured as a vertical narrative dashboard. It begins with high-level KPIs, flows into historical trend analysis (Line Chart), breaks down failures by root cause (Interactive Doughnut + Text), and concludes with vehicle class comparisons. This allows users to start with a broad understanding before drilling into specific failure modes and vehicle reliability, optimizing the cognitive load. -->
+    <!-- Visualization & Content Choices: 1. Overview KPIs: Dynamic stats for immediate context. 2. Decade Trend: Line chart (Chart.js) to show success rate progression over time. 3. Failure Causes: Doughnut chart (Chart.js) linked to interactive text blocks to explain 'why' flights fail. 4. Vehicle Classes: Grouped Bar chart (Chart.js) to compare reliability across different rocket sizes. NO SVG/Mermaid used. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F9F8F6;
+            color: #333333;
+        }
+        
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 380px;
+            }
+        }
+
+        .stat-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-link {
+            transition: color 0.2s ease;
+        }
+        .nav-link:hover {
+            color: #4A6C6F;
+        }
+
+        .cause-btn {
+            transition: all 0.2s ease;
+        }
+        .cause-btn.active {
+            background-color: #4A6C6F;
+            color: #F9F8F6;
+            border-color: #4A6C6F;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-[#4A6C6F] selection:text-white">
+
+    <nav class="fixed w-full z-50 bg-[#F9F8F6]/90 backdrop-blur-md border-b border-[#E5E3DD]">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0 flex items-center font-bold text-xl tracking-tight text-[#4A6C6F]">
+                    &#11044; AEROSTAT
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#overview" class="nav-link text-sm font-semibold text-gray-600">Overview</a>
+                    <a href="#trends" class="nav-link text-sm font-semibold text-gray-600">Historical Trends</a>
+                    <a href="#diagnostics" class="nav-link text-sm font-semibold text-gray-600">Failure Diagnostics</a>
+                    <a href="#vehicle-classes" class="nav-link text-sm font-semibold text-gray-600">Vehicle Classes</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="pt-32 pb-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-gray-900">
+            The Aerospace Resurgence
+        </h1>
+        <p class="text-xl text-gray-600 max-w-3xl leading-relaxed">
+            An interactive analysis of orbital flight success and failure rates from 2016 to 2026. Explore the data driving the most reliable era in human spaceflight history.
+        </p>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 space-y-24">
+
+        <section id="overview" class="scroll-mt-24">
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold mb-2">Executive Overview</h2>
+                <p class="text-gray-600">
+                    The past decade has seen a paradigm shift in aerospace operations. Driven by commercial innovation and reusable architectures, the sheer volume of launches has skyrocketed while maintaining unprecedented reliability. This section provides a snapshot of the current state of orbital launches.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="stat-card bg-white p-6 rounded-2xl border border-[#E5E3DD]">
+                    <div class="text-[#4A6C6F] mb-2 text-2xl">&#128640;</div>
+                    <div class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-1">Global Success Rate</div>
+                    <div class="text-4xl font-bold text-gray-900">97.8<span class="text-2xl text-gray-500">%</span></div>
+                    <div class="mt-2 text-sm text-[#4A6C6F] font-medium">&#8599; +5.2% vs 2016</div>
+                </div>
+                <div class="stat-card bg-white p-6 rounded-2xl border border-[#E5E3DD]">
+                    <div class="text-[#D98A6C] mb-2 text-2xl">&#9888;</div>
+                    <div class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-1">Total Failures (2016-26)</div>
+                    <div class="text-4xl font-bold text-gray-900">42</div>
+                    <div class="mt-2 text-sm text-gray-500 font-medium">Out of 1,850+ attempts</div>
+                </div>
+                <div class="stat-card bg-white p-6 rounded-2xl border border-[#E5E3DD]">
+                    <div class="text-[#4A6C6F] mb-2 text-2xl">&#9851;</div>
+                    <div class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-1">Reusable Success</div>
+                    <div class="text-4xl font-bold text-gray-900">99.1<span class="text-2xl text-gray-500">%</span></div>
+                    <div class="mt-2 text-sm text-gray-500 font-medium">Core recovery operations</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="trends" class="scroll-mt-24 bg-white p-8 rounded-3xl border border-[#E5E3DD] shadow-sm">
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold mb-2">A Decade of Flight (2016-2026)</h2>
+                <p class="text-gray-600 max-w-4xl">
+                    Tracking the global orbital launch success rate over the last ten years reveals a distinct upward trend, despite the exponential increase in total launch volume. The slight dip around 2021-2022 correlates with the mass introduction of untested small-lift commercial vehicles.
+                </p>
+            </div>
+            
+            <div class="w-full flex justify-center">
+                <div class="chart-container">
+                    <canvas id="trendChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="diagnostics" class="scroll-mt-24">
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold mb-2">Failure Diagnostics & Root Causes</h2>
+                <p class="text-gray-600 max-w-4xl">
+                    When launches fail, the causes are complex. This section breaks down the 42 recorded failures over the past decade. Interact with the chart or the buttons below to explore the specific technical areas responsible for mission loss.
+                </p>
+            </div>
+
+            <div class="bg-white p-8 rounded-3xl border border-[#E5E3DD] shadow-sm flex flex-col lg:flex-row gap-12 items-center">
+                
+                <div class="w-full lg:w-1/2">
+                    <div class="chart-container" style="max-width: 400px; height: 350px;">
+                        <canvas id="causeChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="w-full lg:w-1/2 flex flex-col">
+                    <div class="flex flex-wrap gap-2 mb-6" id="cause-buttons">
+                        <button class="cause-btn active px-4 py-2 rounded-full border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50" data-cause="propulsion">Propulsion</button>
+                        <button class="cause-btn px-4 py-2 rounded-full border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50" data-cause="avionics">Avionics/Software</button>
+                        <button class="cause-btn px-4 py-2 rounded-full border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50" data-cause="structural">Structural</button>
+                        <button class="cause-btn px-4 py-2 rounded-full border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50" data-cause="payload">Payload Sep.</button>
+                        <button class="cause-btn px-4 py-2 rounded-full border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50" data-cause="other">Weather/Other</button>
+                    </div>
+
+                    <div id="cause-info" class="bg-[#F9F8F6] p-6 rounded-xl border border-[#E5E3DD] min-h-[180px]">
+                        <h3 class="text-xl font-bold text-[#D98A6C] mb-2" id="cause-title">Propulsion Systems (45%)</h3>
+                        <p class="text-gray-700 leading-relaxed" id="cause-desc">
+                            The most common cause of mission failure. Issues typically arise in the first stage turbo-pumps, combustion instability, or premature engine shutdown. The extreme thermal and acoustic environments make liquid propulsion the highest-risk element of any ascent trajectory.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="vehicle-classes" class="scroll-mt-24 bg-white p-8 rounded-3xl border border-[#E5E3DD] shadow-sm">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+                <div>
+                    <h2 class="text-2xl font-bold mb-2">Performance by Vehicle Class</h2>
+                    <p class="text-gray-600 max-w-2xl">
+                        Not all rockets are created equal. Compare the success rates and total launch volumes across Heavy, Medium, and Small lift vehicles. Use the toggle to filter between the entire decade and recent data.
+                    </p>
+                </div>
+                <div class="bg-[#F9F8F6] p-1 rounded-lg border border-[#E5E3DD] inline-flex">
+                    <button id="btn-all-time" class="px-4 py-2 text-sm font-semibold rounded-md bg-white shadow-sm text-gray-900">All Time (16-26)</button>
+                    <button id="btn-recent" class="px-4 py-2 text-sm font-semibold rounded-md text-gray-500 hover:text-gray-900">Recent (24-26)</button>
+                </div>
+            </div>
+
+            <div class="w-full flex justify-center">
+                <div class="chart-container">
+                    <canvas id="classChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6 pt-6 border-t border-[#E5E3DD]">
+                <div>
+                    <h4 class="font-bold text-gray-900 mb-1">Heavy Lift (&#62;20,000kg)</h4>
+                    <p class="text-sm text-gray-600">Dominated by established players and highly mature reusable platforms. Lowest failure rate due to intense QA and legacy engineering.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-gray-900 mb-1">Medium Lift (2,000 - 20,000kg)</h4>
+                    <p class="text-sm text-gray-600">The workhorse of global telecommunications and government observation. Highly stable, with failures mostly limited to expendable legacy systems.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-gray-900 mb-1">SmallSat Lift (&#60;2,000kg)</h4>
+                    <p class="text-sm text-gray-600">High volume, higher risk. Many new startup entrants driving the failure rate up, though rapid iteration means rapid improvement.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-900 text-gray-400 py-12 text-center">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="mb-4 text-[#F9F8F6] font-bold text-xl tracking-tight">&#11044; AEROSTAT</div>
+            <p class="text-sm mb-4">Interactive data visualization based on the 2026 Aerospace Resurgence Report.</p>
+            <p class="text-xs">&copy; 2026 Data Analysis Division. For demonstration purposes only.</p>
+        </div>
+    </footer>
+
+    <script>
+        const chartColors = {
+            teal: '#4A6C6F',
+            tealLight: 'rgba(74, 108, 111, 0.2)',
+            terracotta: '#D98A6C',
+            dark: '#333333',
+            gray: '#9CA3AF',
+            bg: '#F9F8F6'
+        };
+
+        const globalChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: { font: { family: "'Inter', sans-serif" }, color: chartColors.dark }
+                },
+                tooltip: {
+                    backgroundColor: 'rgba(51, 51, 51, 0.9)',
+                    titleFont: { family: "'Inter', sans-serif", size: 14 },
+                    bodyFont: { family: "'Inter', sans-serif", size: 13 },
+                    padding: 12,
+                    cornerRadius: 8,
+                    displayColors: true
+                }
+            }
+        };
+
+        const initTrendChart = () => {
+            const ctx = document.getElementById('trendChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026'],
+                    datasets: [{
+                        label: 'Global Launch Success Rate (%)',
+                        data: [92.6, 93.1, 94.5, 94.0, 95.8, 93.2, 94.1, 96.5, 97.2, 97.5, 97.8],
+                        borderColor: chartColors.teal,
+                        backgroundColor: chartColors.tealLight,
+                        borderWidth: 3,
+                        pointBackgroundColor: chartColors.bg,
+                        pointBorderColor: chartColors.teal,
+                        pointBorderWidth: 2,
+                        pointRadius: 5,
+                        pointHoverRadius: 7,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    ...globalChartOptions,
+                    scales: {
+                        y: {
+                            min: 90,
+                            max: 100,
+                            grid: { color: '#E5E3DD' },
+                            ticks: {
+                                font: { family: "'Inter', sans-serif" },
+                                color: chartColors.dark,
+                                callback: function(value) { return value + '%'; }
+                            }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: { font: { family: "'Inter', sans-serif" }, color: chartColors.dark }
+                        }
+                    }
+                }
+            });
+        };
+
+        let causeChartInstance = null;
+        const causeData = {
+            labels: ['Propulsion', 'Avionics/Software', 'Structural', 'Payload Sep.', 'Weather/Other'],
+            values: [45, 25, 15, 10, 5],
+            descriptions: {
+                'propulsion': { title: 'Propulsion Systems (45%)', text: 'The most common cause of mission failure. Issues typically arise in the first stage turbo-pumps, combustion instability, or premature engine shutdown. The extreme thermal and acoustic environments make liquid propulsion the highest-risk element of any ascent trajectory.' },
+                'avionics': { title: 'Avionics & Software (25%)', text: 'Guidance, navigation, and control anomalies. Modern rockets rely heavily on automated software architectures. Sensor failures, telemetry loss, or logic errors during staging sequences represent a quarter of all mission losses.' },
+                'structural': { title: 'Structural Integrity (15%)', text: 'Includes aerodynamic stress failures, max-Q breakup, or tank ruptures. While materials science has advanced, the push for lighter composite structures occasionally results in catastrophic material fatigue.' },
+                'payload': { title: 'Payload Separation (10%)', text: 'The rocket reaches orbit, but the mechanism to deploy the satellite fails. This results in a total mission loss despite a successful ascent, often due to pyrotechnic or mechanical deployment failures.' },
+                'other': { title: 'Weather & Other (5%)', text: 'Extremely rare due to stringent launch constraints. Includes unpredictable upper-level wind shear anomalies, lightning strikes immediately post-liftoff, or ground-support equipment failures.' }
+            }
+        };
+
+        const initCauseChart = () => {
+            const ctx = document.getElementById('causeChart').getContext('2d');
+            causeChartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: causeData.labels,
+                    datasets: [{
+                        data: causeData.values,
+                        backgroundColor: [
+                            chartColors.terracotta,
+                            '#D4A373',
+                            '#CCD5AE',
+                            '#E9EDC9',
+                            '#FAEDCB'
+                        ],
+                        borderWidth: 2,
+                        borderColor: chartColors.bg,
+                        hoverOffset: 10
+                    }]
+                },
+                options: {
+                    ...globalChartOptions,
+                    cutout: '70%',
+                    plugins: {
+                        legend: { position: 'right' }
+                    },
+                    onClick: (event, elements) => {
+                        if (elements.length > 0) {
+                            const index = elements[0].index;
+                            const causeKeys = ['propulsion', 'avionics', 'structural', 'payload', 'other'];
+                            updateCauseInfo(causeKeys[index]);
+                        }
+                    }
+                }
+            });
+        };
+
+        const updateCauseInfo = (causeKey) => {
+            document.querySelectorAll('.cause-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`.cause-btn[data-cause="${causeKey}"]`).classList.add('active');
+
+            const info = causeData.descriptions[causeKey];
+            const titleEl = document.getElementById('cause-title');
+            const descEl = document.getElementById('cause-desc');
+            
+            titleEl.style.opacity = 0;
+            descEl.style.opacity = 0;
+            
+            setTimeout(() => {
+                titleEl.textContent = info.title;
+                descEl.textContent = info.text;
+                titleEl.style.opacity = 1;
+                descEl.style.opacity = 1;
+                titleEl.style.transition = 'opacity 0.3s ease';
+                descEl.style.transition = 'opacity 0.3s ease';
+            }, 150);
+        };
+
+        let classChartInstance = null;
+        const classDataAll = [98.2, 96.5, 84.0];
+        const classDataRecent = [99.5, 98.0, 91.2];
+
+        const initClassChart = () => {
+            const ctx = document.getElementById('classChart').getContext('2d');
+            classChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Heavy Lift', 'Medium Lift', 'SmallSat'],
+                    datasets: [{
+                        label: 'Success Rate (%)',
+                        data: classDataAll,
+                        backgroundColor: chartColors.teal,
+                        borderRadius: 6,
+                        barPercentage: 0.6
+                    }]
+                },
+                options: {
+                    ...globalChartOptions,
+                    scales: {
+                        y: {
+                            min: 80,
+                            max: 100,
+                            grid: { color: '#E5E3DD' },
+                            ticks: { font: { family: "'Inter', sans-serif" }, color: chartColors.dark, callback: v => v + '%' }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: { font: { family: "'Inter', sans-serif" }, color: chartColors.dark, font: {weight: 'bold'} }
+                        }
+                    }
+                }
+            });
+        };
+
+        const updateClassChart = (period) => {
+            const btnAll = document.getElementById('btn-all-time');
+            const btnRecent = document.getElementById('btn-recent');
+
+            if (period === 'recent') {
+                classChartInstance.data.datasets[0].data = classDataRecent;
+                btnRecent.classList.replace('text-gray-500', 'text-gray-900');
+                btnRecent.classList.replace('hover:text-gray-900', 'bg-white');
+                btnRecent.classList.add('shadow-sm');
+                
+                btnAll.classList.replace('text-gray-900', 'text-gray-500');
+                btnAll.classList.replace('bg-white', 'hover:text-gray-900');
+                btnAll.classList.remove('shadow-sm');
+            } else {
+                classChartInstance.data.datasets[0].data = classDataAll;
+                btnAll.classList.replace('text-gray-500', 'text-gray-900');
+                btnAll.classList.replace('hover:text-gray-900', 'bg-white');
+                btnAll.classList.add('shadow-sm');
+                
+                btnRecent.classList.replace('text-gray-900', 'text-gray-500');
+                btnRecent.classList.replace('bg-white', 'hover:text-gray-900');
+                btnRecent.classList.remove('shadow-sm');
+            }
+            classChartInstance.update();
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initTrendChart();
+            initCauseChart();
+            initClassChart();
+
+            document.querySelectorAll('.cause-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    updateCauseInfo(e.target.dataset.cause);
+                });
+            });
+
+            document.getElementById('btn-all-time').addEventListener('click', () => updateClassChart('all'));
+            document.getElementById('btn-recent').addEventListener('click', () => updateClassChart('recent'));
+        });
+    </script>
+</body>
+</html>

@@ -10,3 +10,184 @@ Apr 11, 2026 4:08:12 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notif
 INFO: Unsupported notification method: $/setTrace
 Apr 11, 2026 6:04:06 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
 INFO: Unsupported notification method: $/setTrace
+2026.04.19 21:10:23 INFO  tracing is disabled for protocol LSP, to enable tracing of incoming and outgoing JSON messages create an empty file at c:\Multiverse\.metals\lsp.trace.json or C:\Users\Ken Bradford\AppData\Local\scalameta\metals\cache\lsp.trace.json
+2026.04.19 21:10:41 INFO  logging to files C:\Multiverse\.metals\metals.log
+2026.04.19 21:10:41 INFO  Started: Metals version 1.6.7 in folders 'C:\Multiverse' for client Visual Studio Code 1.116.0.
+2026.04.19 21:10:41 INFO  time: initialize in 0.58s
+2026.04.19 21:10:41 INFO  Memory monitor started
+2026.04.19 21:10:53 WARN  Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026.04.19 21:10:54 WARN  no build tool detected in workspace 'C:\Multiverse'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+2026.04.19 21:10:54 WARN  Build server is not auto-connectable.
+2026.04.19 21:10:55 WARN  no build tool detected in workspace 'C:\Multiverse'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+2026.04.19 21:10:55 WARN  Build server is not auto-connectable.
+2026.04.19 21:11:26 INFO  
+2026.04.19 21:11:26 INFO  Template applied in C:\\.\akka-http-kubernetes
+2026.04.19 21:11:26 INFO  
+2026.04.19 21:11:26 INFO  time: ran 'giter8.Giter8' in 8.79s
+2026.04.19 21:12:03 INFO  
+2026.04.19 21:12:03 INFO  Template applied in C:\Multiverse\.\multiverse-seed
+2026.04.19 21:12:03 INFO  
+2026.04.19 21:12:03 INFO  time: ran 'giter8.Giter8' in 9.85s
+2026.04.19 21:12:35 WARN  Build server is not auto-connectable.
+2026.04.19 21:12:39 WARN  Build server is not auto-connectable.
+2026.04.19 21:12:39 WARN  Build server is not auto-connectable.
+2026.04.19 21:14:22 INFO  compilation cancelled
+2026.04.19 21:14:36 WARN  Build server is not auto-connectable.
+2026.04.19 21:14:42 WARN  Build server is not auto-connectable.
+2026.04.19 21:14:45 WARN  Build server is not auto-connectable.
+2026.04.19 21:14:45 WARN  Build server is not auto-connectable.
+2026.04.19 21:14:45 WARN  Build server is not auto-connectable.
+Apr 19, 2026 9:21:59 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+Apr 20, 2026 11:23:55 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+Apr 20, 2026 11:35:47 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleNotification
+WARNING: Notification threw an exception: {
+  "jsonrpc": "2.0",
+  "method": "metals/didFocusTextDocument",
+  "params": [
+    "git:/c%3A/Multiverse/multiverse-seed/.g8/form/app/views/%24model__camel%24/form.scala.html?%7B%22path%22%3A%22c%3A%5C%5CMultiverse%5C%5Cmultiverse-seed%5C%5C.g8%5C%5Cform%5C%5Capp%5C%5Cviews%5C%5C%24model__camel%24%5C%5Cform.scala.html%22%2C%22ref%22%3A%22%22%7D"
+  ]
+}
+java.nio.file.FileSystemNotFoundException: Provider "git" not installed
+	at java.base/java.nio.file.Path.of(Path.java:212)
+	at java.base/java.nio.file.Paths.get(Paths.java:98)
+	at scala.meta.internal.mtags.MtagsEnrichments$XtensionURIMtags.toAbsolutePath(MtagsEnrichments.scala:149)
+	at scala.meta.internal.mtags.MtagsEnrichments$XtensionStringMtags.toAbsolutePath(MtagsEnrichments.scala:209)
+	at scala.meta.internal.metals.MetalsEnrichments$XtensionString.toAbsolutePath(MetalsEnrichments.scala:787)
+	at scala.meta.internal.metals.MetalsEnrichments$XtensionString.toAbsolutePath(MetalsEnrichments.scala:784)
+	at scala.meta.internal.metals.WorkspaceLspService.didFocus(WorkspaceLspService.scala:808)
+	at scala.meta.metals.lsp.DelegatingScalaService.didFocus(DelegatingScalaService.scala:42)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.lambda$recursiveFindRpcMethods$0(GenericEndpoint.java:65)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.notify(GenericEndpoint.java:160)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.handleNotification(RemoteEndpoint.java:225)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.consume(RemoteEndpoint.java:192)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.handleMessage(StreamMessageProducer.java:189)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:97)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:97)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+
+2026.04.20 23:50:16 INFO  tracing is disabled for protocol LSP, to enable tracing of incoming and outgoing JSON messages create an empty file at c:\Multiverse\.metals\lsp.trace.json or C:\Users\Ken Bradford\AppData\Local\scalameta\metals\cache\lsp.trace.json
+2026.04.20 23:50:39 INFO  logging to files C:\Multiverse\.metals\metals.log
+2026.04.20 23:50:39 INFO  Started: Metals version 1.6.7 in folders 'C:\Multiverse' for client Visual Studio Code 1.116.0.
+2026.04.20 23:50:39 INFO  time: initialize in 0.22s
+2026.04.20 23:50:40 INFO  Memory monitor started
+2026.04.20 23:50:56 WARN  Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+Apr 21, 2026 10:09:24 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+Apr 21, 2026 10:13:52 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleNotification
+WARNING: Notification threw an exception: {
+  "jsonrpc": "2.0",
+  "method": "metals/didFocusTextDocument",
+  "params": [
+    "git:/c%3A/Multiverse/multiverse-seed/.g8/form/app/views/%24model__camel%24/form.scala.html?%7B%22path%22%3A%22c%3A%5C%5CMultiverse%5C%5Cmultiverse-seed%5C%5C.g8%5C%5Cform%5C%5Capp%5C%5Cviews%5C%5C%24model__camel%24%5C%5Cform.scala.html%22%2C%22ref%22%3A%22%22%7D"
+  ]
+}
+java.nio.file.FileSystemNotFoundException: Provider "git" not installed
+	at java.base/java.nio.file.Path.of(Path.java:212)
+	at java.base/java.nio.file.Paths.get(Paths.java:98)
+	at scala.meta.internal.mtags.MtagsEnrichments$XtensionURIMtags.toAbsolutePath(MtagsEnrichments.scala:149)
+	at scala.meta.internal.mtags.MtagsEnrichments$XtensionStringMtags.toAbsolutePath(MtagsEnrichments.scala:209)
+	at scala.meta.internal.metals.MetalsEnrichments$XtensionString.toAbsolutePath(MetalsEnrichments.scala:787)
+	at scala.meta.internal.metals.MetalsEnrichments$XtensionString.toAbsolutePath(MetalsEnrichments.scala:784)
+	at scala.meta.internal.metals.WorkspaceLspService.didFocus(WorkspaceLspService.scala:808)
+	at scala.meta.metals.lsp.DelegatingScalaService.didFocus(DelegatingScalaService.scala:42)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.lambda$recursiveFindRpcMethods$0(GenericEndpoint.java:65)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.notify(GenericEndpoint.java:160)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.handleNotification(RemoteEndpoint.java:225)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.consume(RemoteEndpoint.java:192)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.handleMessage(StreamMessageProducer.java:189)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:97)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:97)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+
+2026.04.21 10:14:28 INFO  no build target found for C:\Multiverse\multiverse-seed\.g8\form\app\controllers\$model__Camel$Controller.scala. Using presentation compiler with project's scala-library version: 3.3.7
+2026.04.21 10:17:15 WARN  no build target for: C:\Multiverse\multiverse-seed\.g8\form\app\controllers\$model__Camel$Controller.scala
+Apr 21, 2026 10:17:15 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 6
+2026.04.21 10:17:15 INFO  no build target found for C:\Multiverse\multiverse-seed\.g8\form\app\controllers\$model__Camel$Controller.scala. Using presentation compiler with project's scala-library version: 3.3.7
+2026.04.21 10:17:16 INFO  no build target found for C:\Multiverse\multiverse-seed\.g8\form\app\controllers\$model__Camel$Controller.scala. Using presentation compiler with project's scala-library version: 3.3.7
+Apr 21, 2026 10:17:17 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 11
+Apr 21, 2026 10:17:17 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 10
+Apr 21, 2026 10:17:17 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 9
+Apr 21, 2026 10:17:17 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 7
+Apr 21, 2026 10:17:17 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+Apr 21, 2026 10:17:17 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+Apr 21, 2026 10:17:17 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+Apr 21, 2026 10:17:17 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+Apr 21, 2026 10:17:17 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+Apr 21, 2026 10:17:17 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+Apr 21, 2026 10:17:17 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+Apr 21, 2026 10:17:17 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+Apr 21, 2026 10:18:10 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+Apr 21, 2026 10:18:48 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+Apr 21, 2026 10:20:04 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+Apr 21, 2026 10:20:05 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+Apr 21, 2026 10:20:09 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+Apr 21, 2026 10:20:47 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+Apr 21, 2026 10:22:41 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+Apr 21, 2026 10:23:21 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+Apr 21, 2026 10:29:30 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+Apr 21, 2026 10:34:15 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+Apr 21, 2026 10:35:56 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+Apr 21, 2026 1:49:18 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+2026.04.23 11:37:28 INFO  tracing is disabled for protocol LSP, to enable tracing of incoming and outgoing JSON messages create an empty file at c:\Multiverse\.metals\lsp.trace.json or C:\Users\Ken Bradford\AppData\Local\scalameta\metals\cache\lsp.trace.json
+2026.04.23 11:37:52 INFO  logging to files C:\Multiverse\.metals\metals.log
+2026.04.23 11:37:52 INFO  Started: Metals version 1.6.7 in folders 'C:\Multiverse' for client Visual Studio Code 1.117.0.
+2026.04.23 11:37:52 INFO  time: initialize in 0.21s
+2026.04.23 11:37:52 INFO  Memory monitor started
+2026.04.23 11:38:00 WARN  Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+Apr 23, 2026 1:08:41 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+Apr 23, 2026 1:16:50 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+Apr 23, 2026 3:50:17 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+2026.04.30 10:20:04 INFO  Started: Metals version 1.6.7 in folders 'C:\Multiverse' for client Visual Studio Code 1.117.0.
+2026.04.30 10:20:04 INFO  time: initialize in 0.74s
+2026.04.30 10:20:05 INFO  Memory monitor started
+2026.04.30 10:20:23 WARN  Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026.04.30 11:44:55 INFO  Started: Metals version 1.6.7 in folders 'C:\Multiverse' for client Visual Studio Code 1.117.0.
+2026.04.30 11:44:55 INFO  time: initialize in 0.29s
+2026.04.30 11:44:56 INFO  Memory monitor started
+2026.04.30 11:45:10 WARN  Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.

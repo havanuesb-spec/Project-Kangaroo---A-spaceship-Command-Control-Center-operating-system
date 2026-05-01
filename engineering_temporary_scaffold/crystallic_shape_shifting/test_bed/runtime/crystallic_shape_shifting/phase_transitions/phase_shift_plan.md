@@ -1,0 +1,1 @@
+Transition sequence and reversible hinge timing.

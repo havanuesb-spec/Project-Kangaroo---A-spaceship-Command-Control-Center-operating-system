@@ -1,0 +1,56 @@
+{
+  "generated_at": "2026-04-27T21:55:19.517955+00:00",
+  "mode": "apply",
+  "source_root": "C:\\Multiverse\\engineering_temporary_scaffold\\crystallic_shape_shifting\\test_bed\\runtime\\incoming",
+  "destination_root": "C:\\Multiverse\\engineering_temporary_scaffold\\crystallic_shape_shifting\\test_bed\\runtime\\crystallic_shape_shifting",
+  "moves": [
+    {
+      "source": "C:\\Multiverse\\engineering_temporary_scaffold\\crystallic_shape_shifting\\test_bed\\runtime\\incoming\\Crystal lattice notes.txt",
+      "destination": "C:\\Multiverse\\engineering_temporary_scaffold\\crystallic_shape_shifting\\test_bed\\runtime\\crystallic_shape_shifting\\core_geometry\\Crystal lattice notes.txt",
+      "bucket": "core_geometry",
+      "item_type": "file",
+      "reason": "keyword score 2 from tokens ['crystal', 'lattice', 'notes', 'txt']",
+      "applied": true
+    },
+    {
+      "source": "C:\\Multiverse\\engineering_temporary_scaffold\\crystallic_shape_shifting\\test_bed\\runtime\\incoming\\morph_variant_alpha",
+      "destination": "C:\\Multiverse\\engineering_temporary_scaffold\\crystallic_shape_shifting\\test_bed\\runtime\\crystallic_shape_shifting\\morphologies\\morph_variant_alpha",
+      "bucket": "morphologies",
+      "item_type": "directory",
+      "reason": "keyword score 3 from tokens ['alpha', 'morph', 'morphology', 'variant']",
+      "applied": true
+    },
+    {
+      "source": "C:\\Multiverse\\engineering_temporary_scaffold\\crystallic_shape_shifting\\test_bed\\runtime\\incoming\\phase_shift_plan.md",
+      "destination": "C:\\Multiverse\\engineering_temporary_scaffold\\crystallic_shape_shifting\\test_bed\\runtime\\crystallic_shape_shifting\\phase_transitions\\phase_shift_plan.md",
+      "bucket": "phase_transitions",
+      "item_type": "file",
+      "reason": "keyword score 2 from tokens ['md', 'phase', 'plan', 'shift']",
+      "applied": true
+    },
+    {
+      "source": "C:\\Multiverse\\engineering_temporary_scaffold\\crystallic_shape_shifting\\test_bed\\runtime\\incoming\\prototype_mock.py",
+      "destination": "C:\\Multiverse\\engineering_temporary_scaffold\\crystallic_shape_shifting\\test_bed\\runtime\\crystallic_shape_shifting\\prototypes\\prototype_mock.py",
+      "bucket": "prototypes",
+      "item_type": "file",
+      "reason": "keyword score 2 from tokens ['mock', 'prototype', 'py']",
+      "applied": true
+    },
+    {
+      "source": "C:\\Multiverse\\engineering_temporary_scaffold\\crystallic_shape_shifting\\test_bed\\runtime\\incoming\\safe_natural_resin.txt",
+      "destination": "C:\\Multiverse\\engineering_temporary_scaffold\\crystallic_shape_shifting\\test_bed\\runtime\\crystallic_shape_shifting\\materials\\safe_natural_resin.txt",
+      "bucket": "materials",
+      "item_type": "file",
+      "reason": "keyword score 2 from tokens ['natural', 'resin', 'safe', 'txt']",
+      "applied": true
+    },
+    {
+      "source": "C:\\Multiverse\\engineering_temporary_scaffold\\crystallic_shape_shifting\\test_bed\\runtime\\incoming\\stress_simulation.json",
+      "destination": "C:\\Multiverse\\engineering_temporary_scaffold\\crystallic_shape_shifting\\test_bed\\runtime\\crystallic_shape_shifting\\simulations\\stress_simulation.json",
+      "bucket": "simulations",
+      "item_type": "file",
+      "reason": "keyword score 3 from tokens ['json', 'sim', 'simulation', 'stress']",
+      "applied": true
+    }
+  ]
+}
