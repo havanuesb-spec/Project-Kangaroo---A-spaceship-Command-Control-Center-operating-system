@@ -191,3 +191,11 @@ INFO: Unsupported notification method: $/setTrace
 2026.04.30 11:44:55 INFO  time: initialize in 0.29s
 2026.04.30 11:44:56 INFO  Memory monitor started
 2026.04.30 11:45:10 WARN  Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026.05.01 14:33:35 INFO  tracing is disabled for protocol LSP, to enable tracing of incoming and outgoing JSON messages create an empty file at c:\Multiverse\.metals\lsp.trace.json or C:\Users\Ken Bradford\AppData\Local\scalameta\metals\cache\lsp.trace.json
+2026.05.01 14:34:10 INFO  logging to files C:\Multiverse\.metals\metals.log
+2026.05.01 14:34:10 INFO  Started: Metals version 1.6.7 in folders 'C:\Multiverse' for client Visual Studio Code 1.117.0.
+2026.05.01 14:34:10 INFO  time: initialize in 0.49s
+2026.05.01 14:34:11 INFO  Memory monitor started
+2026.05.01 14:34:31 WARN  Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+May 01, 2026 2:46:12 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
